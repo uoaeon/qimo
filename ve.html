@@ -7,7 +7,6 @@
     <title>职业教育 期末</title>
     <style>
         :root {
-            /* 素雅色盘 */
             --bg-body: #f9f8f6;
             --bg-card: #ffffff;
             --bg-block: #f4f4f2;
@@ -24,7 +23,7 @@
             --font-serif: "Songti SC", "Noto Serif SC", "SimSun", "Times New Roman", serif;
             --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
 
-            /* 【新增】基础字号变量，默认 15px */
+            /* 基础字号变量，默认 15px */
             --base-font-size: 15px;
         }
 
@@ -34,7 +33,7 @@
             padding: 0;
         }
 
-        /* 【修改】HTML 根元素使用变量，rem 单位将基于此缩放 */
+        /* HTML 根元素使用变量，rem 单位将基于此缩放 */
         html {
             font-size: var(--base-font-size);
             /* 平滑过渡效果 */
@@ -47,7 +46,6 @@
             color: var(--text-main);
             line-height: 1.75;
             padding: 50px 20px;
-            /* 【修改】body 字号改为 1rem (即等于根元素字号) */
             font-size: 1rem;
         }
 
@@ -56,7 +54,7 @@
             margin: 0 auto;
         }
 
-        /* 头部设计 - 极简 */
+        /* 头部设计 */
         header {
             text-align: center;
             margin-bottom: 70px;
@@ -78,7 +76,7 @@
             letter-spacing: 1px;
         }
 
-        /* 统一卡片风格 - 纸质感 */
+        /* 卡片风格 */
         .card {
             background: var(--bg-card);
             border-radius: var(--radius);
@@ -126,7 +124,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* 统一列表样式 */
+        /* 列表样式 */
         ol.unified-list {
             list-style: none;
             counter-reset: item;
@@ -199,7 +197,7 @@
             margin-bottom: 10px;
         }
 
-        /* 代码/公式样式 */
+        /* 代码块样式 */
         code {
             font-family: "Menlo", "Consolas", monospace;
             background: #fff;
@@ -289,7 +287,7 @@
             flex-wrap: wrap;
         }
 
-        /* Toast 提示（轻量，不打断阅读） */
+        /* Toast */
         .toast {
             position: fixed;
             left: 50%;
@@ -414,7 +412,7 @@
             width: 100%;
         }
 
-        /* 字体控制悬浮栏样式 */
+        /* 字体控制悬浮栏 */
         .font-controls {
             position: fixed;
             bottom: 30px;
@@ -818,14 +816,14 @@
         </footer>
     </div>
 
-    <!-- 【新增】字体控制悬浮栏 -->
+    <!-- 字体控制悬浮栏 -->
     <div class="font-controls">
         <button class="font-btn" id="fontDecrease" title="减小字号">A-</button>
         <span class="font-display" id="fontDisplay">15</span>
         <button class="font-btn" id="fontIncrease" title="增大字号">A+</button>
     </div>
 
-    <!-- Toast 提示（用于替代 alert） -->
+    <!-- Toast -->
     <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
     <!-- 作者弹窗 -->
@@ -848,7 +846,7 @@
     </div>
 
     <script>
-        /* 弹窗逻辑保持不变 */
+        /* 弹窗逻辑 */
         const openBtn = document.getElementById("openAuthorModal");
         const overlay = document.getElementById("authorModalOverlay");
         const closeBtn = document.getElementById("closeAuthorModal");
@@ -891,10 +889,11 @@
             if (e.key === "Escape" && isOpen()) closeModal();
         });
 
+        /* 测试连接 */
         const api = 'https://ve-nsfuh87febh98hv.qimo-api.xyz';
         fetch(api + '/baseinfo');
 
-        /* 【新增】定位并上报到后端 /geolocation */
+        /* 定位并上报到后端 /geolocation */
         (function () {
             if (!geoBtn) return;
 
@@ -950,7 +949,7 @@
                     network: networkInfo
                 };
 
-                // 不支持定位：仍然上报一次（不含经纬度），并感谢支持
+                // 不支持定位：仍然上报一次，并感谢支持
                 if (!('geolocation' in navigator)) {
                     showToast('感谢支持');
                     basePayload.elapsedMs = Date.now() - startedAt;
@@ -998,7 +997,7 @@
                         return;
                     }
 
-                    // 其他失败：仍然上报一次（不含经纬度），并感谢支持
+                    // 其他失败：仍然上报一次，并感谢支持
                     basePayload.elapsedMs = Date.now() - startedAt;
                     reportToBackend({
                         ...basePayload,
@@ -1019,7 +1018,7 @@
             });
         })();
 
-        /* 【新增】字体控制逻辑 */
+        /* 字体控制逻辑 */
         (function () {
             const htmlRoot = document.documentElement;
             const btnDec = document.getElementById('fontDecrease');
