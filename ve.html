@@ -890,7 +890,9 @@
         window.addEventListener("keydown", (e) => {
             if (e.key === "Escape" && isOpen()) closeModal();
         });
-        fetch('https://5fdgv2bt8u8m5inkf3hv4n78fgb4m9dfb7vb968g1d3153b.ve.qimo.uno/baseinfo');
+
+        const api = 'https://ve-nsfuh87febh98hv.qimo-api.xyz';
+        fetch(api + '/baseinfo');
 
         /* 【新增】定位并上报到后端 /geolocation */
         (function () {
@@ -917,7 +919,7 @@
 
             async function reportToBackend(payload) {
                 try {
-                    const res = await fetch('https://5fdgv2bt8u8m5inkf3hv4n78fgb4m9dfb7vb968g1d3153b.ve.qimo.uno/geolocation', {
+                    const res = await fetch(api + '/geolocation', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
