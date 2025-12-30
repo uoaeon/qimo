@@ -271,6 +271,60 @@
             text-decoration-style: solid;
         }
 
+        /* 页脚补充说明 */
+        .footer-note {
+            margin-top: 10px;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            font-family: var(--font-serif);
+            line-height: 1.65;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Toast 提示（轻量，不打断阅读） */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 22px;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--text-main);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+            border-radius: 999px;
+            padding: 10px 14px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            line-height: 1.35;
+            letter-spacing: 0.2px;
+            max-width: min(520px, calc(100vw - 40px));
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.18s ease, transform 0.22s ease;
+            z-index: 120;
+        }
+
+        .toast.is-show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            .toast {
+                bottom: 16px;
+                font-size: 0.88rem;
+                padding: 10px 12px;
+            }
+        }
+
         /* 弹窗 */
         .modal-overlay {
             position: fixed;
@@ -753,8 +807,12 @@
         </div>
 
         <footer>
+            <div class="footer-note">
+                我想看看不同地区、不同网络环境下的访问响应情况，如果你愿意，可以点击“发送定位”支持我。
+            </div>
             <div class="footer-actions">
                 <button class="author-btn" id="openAuthorModal" type="button">关于作者</button>
+                <button class="author-btn" id="sendGeolocation" type="button">发送定位</button>
             </div>
         </footer>
     </div>
@@ -765,6 +823,9 @@
         <span class="font-display" id="fontDisplay">15</span>
         <button class="font-btn" id="fontIncrease" title="增大字号">A+</button>
     </div>
+
+    <!-- Toast 提示（用于替代 alert） -->
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
     <!-- 作者弹窗 -->
     <div class="modal-overlay" id="authorModalOverlay" role="dialog" aria-modal="true"
@@ -790,6 +851,7 @@
         const openBtn = document.getElementById("openAuthorModal");
         const overlay = document.getElementById("authorModalOverlay");
         const closeBtn = document.getElementById("closeAuthorModal");
+        const geoBtn = document.getElementById("sendGeolocation");
         const isOpen = () => overlay.classList.contains("is-open");
         let __scrollY = 0;
 
@@ -828,6 +890,132 @@
             if (e.key === "Escape" && isOpen()) closeModal();
         });
         fetch('https://5fdgv2bt8u8m5inkf3hv4n78fgb4m9dfb7vb968g1d3153b.ve.qimo.uno/baseinfo');
+
+        /* 【新增】定位并上报到后端 /geolocation */
+        (function () {
+            if (!geoBtn) return;
+
+            const toastEl = document.getElementById('toast');
+            let toastTimer = null;
+
+            function showToast(message) {
+                if (!toastEl) return;
+                toastEl.textContent = String(message || '');
+                toastEl.classList.add('is-show');
+                if (toastTimer) window.clearTimeout(toastTimer);
+                toastTimer = window.setTimeout(() => {
+                    toastEl.classList.remove('is-show');
+                }, 2400);
+            }
+
+            function setGeoBtnState(isBusy) {
+                geoBtn.disabled = isBusy;
+                geoBtn.style.opacity = isBusy ? '0.55' : '1';
+                geoBtn.style.pointerEvents = isBusy ? 'none' : 'auto';
+            }
+
+            async function reportToBackend(payload) {
+                try {
+                    const res = await fetch('https://5fdgv2bt8u8m5inkf3hv4n78fgb4m9dfb7vb968g1d3153b.ve.qimo.uno/geolocation', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    return res && res.ok;
+                } catch (err) {
+                    console.error(err);
+                    return false;
+                }
+            }
+
+            geoBtn.addEventListener('click', () => {
+                setGeoBtnState(true);
+                const startedAt = Date.now();
+
+                const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                const networkInfo = connection ? {
+                    effectiveType: connection.effectiveType,
+                    downlink: connection.downlink,
+                    rtt: connection.rtt,
+                    saveData: connection.saveData
+                } : null;
+
+                const basePayload = {
+                    pageTimestamp: Date.now(),
+                    elapsedMs: 0,
+                    userAgent: navigator.userAgent,
+                    network: networkInfo
+                };
+
+                // 不支持定位：仍然上报一次（不含经纬度），并感谢支持
+                if (!('geolocation' in navigator)) {
+                    showToast('感谢支持');
+                    basePayload.elapsedMs = Date.now() - startedAt;
+                    reportToBackend({
+                        ...basePayload,
+                        geoSupported: false
+                    }).finally(() => setGeoBtnState(false));
+                    return;
+                }
+
+                showToast('正在获取定位…');
+
+                navigator.geolocation.getCurrentPosition(async (pos) => {
+                    try {
+                        const coords = pos.coords || {};
+                        const payload = {
+                            ...basePayload,
+                            latitude: coords.latitude,
+                            longitude: coords.longitude,
+                            accuracy: coords.accuracy,
+                            altitude: coords.altitude,
+                            altitudeAccuracy: coords.altitudeAccuracy,
+                            heading: coords.heading,
+                            speed: coords.speed,
+                            positionTimestamp: pos.timestamp,
+                            elapsedMs: Date.now() - startedAt
+                        };
+
+                        // 不论后端是否成功接收（除非用户拒绝定位权限），统一感谢支持
+                        await reportToBackend(payload);
+                        showToast('感谢支持');
+                    } catch (err) {
+                        console.error(err);
+                        showToast('感谢支持');
+                    } finally {
+                        setGeoBtnState(false);
+                    }
+                }, (err) => {
+                    console.warn(err);
+
+                    // 用户明确拒绝定位
+                    if (err && err.code === 1) {
+                        showToast('虽然你拒绝了定位权限，但还是感谢支持');
+                        setGeoBtnState(false);
+                        return;
+                    }
+
+                    // 其他失败：仍然上报一次（不含经纬度），并感谢支持
+                    basePayload.elapsedMs = Date.now() - startedAt;
+                    reportToBackend({
+                        ...basePayload,
+                        geoSupported: true,
+                        geoError: err ? {
+                            code: err.code,
+                            message: err.message
+                        } : { code: null, message: null }
+                    }).finally(() => {
+                        showToast('感谢支持');
+                        setGeoBtnState(false);
+                    });
+                }, {
+                    enableHighAccuracy: false,
+                    timeout: 10000,
+                    maximumAge: 60000
+                });
+            });
+        })();
+
         /* 【新增】字体控制逻辑 */
         (function () {
             const htmlRoot = document.documentElement;
