@@ -1070,26 +1070,32 @@
                 showBar();
             }, true);
 
-            // 手势：上滑隐藏；下滑唤起（阈值避免误触）
+            // 手势：上滑隐藏；下滑唤起（滑动中立即触发，阈值避免误触）
             let startY = null;
+            let gestureTriggered = false;
             const THRESHOLD = 28;
 
             document.addEventListener('touchstart', (e) => {
                 if (!mq.matches) return;
                 if (typeof isOpen === 'function' && isOpen()) return;
                 if (!e.touches || e.touches.length !== 1) return;
-                startY = e.touches[0].clientY;
+                const t = e.touches[0];
+                startY = t.clientY;
+                gestureTriggered = false;
             }, { passive: true });
 
-            document.addEventListener('touchend', (e) => {
+            document.addEventListener('touchmove', (e) => {
                 if (!mq.matches) return;
                 if (typeof isOpen === 'function' && isOpen()) return;
+                if (gestureTriggered) return;
                 if (startY == null) return;
-                const endY = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientY : startY;
-                const delta = endY - startY;
-                startY = null;
+                if (!e.touches || e.touches.length !== 1) return;
 
+                const currentY = e.touches[0].clientY;
+                const delta = currentY - startY;
                 if (Math.abs(delta) < THRESHOLD) return;
+
+                gestureTriggered = true;
                 if (delta < 0) {
                     // 手指向上滑
                     hideBar();
@@ -1098,6 +1104,11 @@
 
                 // 手指向下滑
                 showBar();
+            }, { passive: true });
+
+            document.addEventListener('touchend', () => {
+                startY = null;
+                gestureTriggered = false;
             }, { passive: true });
         })();
 
