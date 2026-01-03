@@ -1,343 +1,358 @@
 <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>&#x9a6c;&#x539f;&#x4e3b;&#x89c2;&#x9898;</title>
-            <style>
-/* From extension vscode.github */
-/*---------------------------------------------------------------------------------------------
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>&#x9a6c;&#x539f;&#x4e3b;&#x89c2;&#x9898;</title>
+  <style>
+    /* From extension vscode.github */
+    /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-.vscode-dark img[src$=\#gh-light-mode-only],
-.vscode-light img[src$=\#gh-dark-mode-only],
-.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
-.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
-	display: none;
-}
+    .vscode-dark img[src$=\#gh-light-mode-only],
+    .vscode-light img[src$=\#gh-dark-mode-only],
+    .vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+    .vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+      display: none;
+    }
 
-</style>
-            
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
-<style>
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
-                font-size: 14px;
-                line-height: 1.6;
-            }
-        </style>
-        <style>
-.task-list-item {
-    list-style-type: none;
-}
+    h3 {
+      font-size: 1.5em;
+      font-weight: bold;
+      border-left: 6px solid #684a84;
+      padding-left: 10px;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+      background: #fff7f7;
+      box-shadow: 0 2px 8px rgba(209, 36, 47, 0.08);
+      border-radius: 4px;
+    }
+  </style>
 
-.task-list-item-checkbox {
-    margin-left: -20px;
-    vertical-align: middle;
-    pointer-events: none;
-}
-</style>
-<style>
-:root {
-  --color-note: #0969da;
-  --color-tip: #1a7f37;
-  --color-warning: #9a6700;
-  --color-severe: #bc4c00;
-  --color-caution: #d1242f;
-  --color-important: #8250df;
-}
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  </style>
+  <style>
+    .task-list-item {
+      list-style-type: none;
+    }
 
-</style>
-<style>
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-note: #2f81f7;
-    --color-tip: #3fb950;
-    --color-warning: #d29922;
-    --color-severe: #db6d28;
-    --color-caution: #f85149;
-    --color-important: #a371f7;
-  }
-}
+    .task-list-item-checkbox {
+      margin-left: -20px;
+      vertical-align: middle;
+      pointer-events: none;
+    }
+  </style>
+  <style>
+    :root {
+      --color-note: #0969da;
+      --color-tip: #1a7f37;
+      --color-warning: #9a6700;
+      --color-severe: #bc4c00;
+      --color-caution: #d1242f;
+      --color-important: #8250df;
+    }
+  </style>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-note: #2f81f7;
+        --color-tip: #3fb950;
+        --color-warning: #d29922;
+        --color-severe: #db6d28;
+        --color-caution: #f85149;
+        --color-important: #a371f7;
+      }
+    }
+  </style>
+  <style>
+    .markdown-alert {
+      padding: 0.5rem 1rem;
+      margin-bottom: 16px;
+      color: inherit;
+      border-left: .25em solid #888;
+    }
 
-</style>
-<style>
-.markdown-alert {
-  padding: 0.5rem 1rem;
-  margin-bottom: 16px;
-  color: inherit;
-  border-left: .25em solid #888;
-}
+    .markdown-alert>:first-child {
+      margin-top: 0
+    }
 
-.markdown-alert>:first-child {
-  margin-top: 0
-}
+    .markdown-alert>:last-child {
+      margin-bottom: 0
+    }
 
-.markdown-alert>:last-child {
-  margin-bottom: 0
-}
+    .markdown-alert .markdown-alert-title {
+      display: flex;
+      font-weight: 500;
+      align-items: center;
+      line-height: 1
+    }
 
-.markdown-alert .markdown-alert-title {
-  display: flex;
-  font-weight: 500;
-  align-items: center;
-  line-height: 1
-}
+    .markdown-alert .markdown-alert-title .octicon {
+      margin-right: 0.5rem;
+      display: inline-block;
+      overflow: visible !important;
+      vertical-align: text-bottom;
+      fill: currentColor;
+    }
 
-.markdown-alert .markdown-alert-title .octicon {
-  margin-right: 0.5rem;
-  display: inline-block;
-  overflow: visible !important;
-  vertical-align: text-bottom;
-  fill: currentColor;
-}
+    .markdown-alert.markdown-alert-note {
+      border-left-color: var(--color-note);
+    }
 
-.markdown-alert.markdown-alert-note {
-  border-left-color: var(--color-note);
-}
+    .markdown-alert.markdown-alert-note .markdown-alert-title {
+      color: var(--color-note);
+    }
 
-.markdown-alert.markdown-alert-note .markdown-alert-title {
-  color: var(--color-note);
-}
+    .markdown-alert.markdown-alert-important {
+      border-left-color: var(--color-important);
+    }
 
-.markdown-alert.markdown-alert-important {
-  border-left-color: var(--color-important);
-}
+    .markdown-alert.markdown-alert-important .markdown-alert-title {
+      color: var(--color-important);
+    }
 
-.markdown-alert.markdown-alert-important .markdown-alert-title {
-  color: var(--color-important);
-}
+    .markdown-alert.markdown-alert-warning {
+      border-left-color: var(--color-warning);
+    }
 
-.markdown-alert.markdown-alert-warning {
-  border-left-color: var(--color-warning);
-}
+    .markdown-alert.markdown-alert-warning .markdown-alert-title {
+      color: var(--color-warning);
+    }
 
-.markdown-alert.markdown-alert-warning .markdown-alert-title {
-  color: var(--color-warning);
-}
+    .markdown-alert.markdown-alert-tip {
+      border-left-color: var(--color-tip);
+    }
 
-.markdown-alert.markdown-alert-tip {
-  border-left-color: var(--color-tip);
-}
+    .markdown-alert.markdown-alert-tip .markdown-alert-title {
+      color: var(--color-tip);
+    }
 
-.markdown-alert.markdown-alert-tip .markdown-alert-title {
-  color: var(--color-tip);
-}
+    .markdown-alert.markdown-alert-caution {
+      border-left-color: var(--color-caution);
+    }
 
-.markdown-alert.markdown-alert-caution {
-  border-left-color: var(--color-caution);
-}
+    .markdown-alert.markdown-alert-caution .markdown-alert-title {
+      color: var(--color-caution);
+    }
+  </style>
 
-.markdown-alert.markdown-alert-caution .markdown-alert-title {
-  color: var(--color-caution);
-}
+</head>
 
-</style>
-        
-        </head>
-        <body class="vscode-body vscode-light">
-            <h1 id="马原主观题">马原主观题</h1>
-<h2 id="名词解释4题每题4分">名词解释（4题，每题4分）</h2>
-<h3 id="1-人的认识的非理性因素">1. 人的认识的非理性因素</h3>
-<ul>
-<li>主要指认识主体的情感和意志。</li>
-<li>广义上包括具有不自觉性、非逻辑性的认识形式（如联想、想象、猜测、顿悟、灵感）。</li>
-<li>对于人的认识能力和认识活动具有激活、驱动作用。</li>
-</ul>
-<h3 id="2-主体客体化">2. 主体客体化</h3>
-<ul>
-<li>是人通过实践使自己的本质力量作用于客体，使其按照主体的需要发生结构和功能上的变化，形成了世界上本来不存在的对象物。</li>
-<li>是人的体力和智力的物化体现。</li>
-<li>是主体的本质力量通过实践活动沉淀、凝聚、物化在客体中。</li>
-</ul>
-<h3 id="3-评价价值评价">3. 评价（价值评价）</h3>
-<ul>
-<li>是一种关于价值现象的认识活动。</li>
-<li>是主体对客体价值以及价值大小所作的评判或判断，也称价值判断。</li>
-<li>具有主观性。</li>
-<li><strong>正确评价</strong> 是正确反应价值关系的评价。</li>
-</ul>
-<h3 id="4-社会意识形式">4. 社会意识形式</h3>
-<ul>
-<li>是高层次的社会意识。</li>
-<li>是自觉的、系统的、相对稳定的社会意识（包括政治法律思想、道德、艺术、宗教、哲学、科学）。</li>
-<li>以理性认识为主。</li>
-<li>以社会心理为基础，对社会心理起指导和影响作用。</li>
-</ul>
-<h3 id="5-社会革命">5. 社会革命</h3>
-<ul>
-<li>是社会基本矛盾所引起的广泛而深刻的社会变革的统称。</li>
-<li>既包括推翻旧制度旧社会、建立新制度新社会的 <strong>革命（狭义的社会革命）</strong>，也包括不变更根本制度，但对体制机制进行深刻改造并对社会进步影响深远的 <strong>改革</strong>。</li>
-<li><strong>革命（狭义的社会革命）</strong> 是阶级斗争的最高形式，实质是革命阶级推翻反动阶级的统治，用新的社会制度代替旧的社会制度。</li>
-<li>在社会形态更替和一定社会自身发展中有巨大的历史进步作用。</li>
-</ul>
-<h3 id="6-两个王国">6. 两个王国</h3>
-<blockquote>
-<ul>
-<li><strong>必然王国</strong> 指人类在社会生活中受盲目的、异己的自然规律和社会规律支配的状态。</li>
-<li><strong>自由王国</strong> 指人类在认识客观规律的基础上，能够自觉运用规律来改造世界和支配自身社会关系的状态。</li>
-</ul>
-<p>——DeepSeek</p>
-</blockquote>
-<h3 id="7-物质动因">7. 物质动因</h3>
-<blockquote>
-<p>指推动人类社会发展、历史事件发生以及主体行为选择的客观物质性因素。 ——豆包</p>
-</blockquote>
-<br>
-<h2 id="简答2题共12分论述2题共20分材料分析1题22分">简答（2题，共12分）、论述（2题，共20分）、材料分析（1题，22分）</h2>
-<h3 id="8-辩证的否定观的基本内容是什么">8. 辩证的否定观的基本内容是什么？</h3>
-<ul>
-<li>否定是事物的自我否定、自我发展，是事物内部矛盾运动的结果。</li>
-<li>否定是事物发展的环节，是旧事物向新事物的转变，是从旧质到新质的飞跃。</li>
-<li>否定是新旧事物联系的环节，新事物孕育产生于旧事物，新旧事物是通过否定环节联系起来的。</li>
-<li>辩证否定的实质是“扬弃”，即新事物对旧事物既批判又继承，既克服其消极因素又保留其积极因素。</li>
-</ul>
-<h3 id="9-简述唯心史观的主要缺陷">9. 简述唯心史观的主要缺陷。</h3>
-<ul>
-<li>没有进一步考究思想动机背后的物质动因和经济根源。</li>
-<li>忽视人民群众创造历史的决定作用。</li>
-</ul>
-<h3 id="10-简述认识与实践的关系">10. 简述认识与实践的关系。</h3>
-<ul>
-<li>实践决定认识。</li>
-<li>认识指导实践。</li>
-</ul>
-<blockquote>
-<p>实践的观点是辩证唯物论的认识论之第一和基本的观点。 ——《毛泽东选集》</p>
-</blockquote>
-<h3 id="11-如何理解实践和认识是具体的历史的统一">11. 如何理解实践和认识是具体的、历史的统一？</h3>
-<h4 id="推导">推导</h4>
-<ul>
-<li>主观必须统一于客观，认识必须统一于实践。</li>
-<li>客观实践是具体的、历史的 ⇒ 主观认识是具体的、历史的。</li>
-</ul>
-<h4 id="概念">概念</h4>
-<ul>
-<li>具体的统一：主观认识要与一定时间、地点、条件下的客观实践相符合。</li>
-<li>历史的统一：主观认识要同特定历史发展阶段的客观实践相符合。</li>
-</ul>
-<blockquote>
-<p>在实践和认识的辨证运动中，主管必须统一于客观，认识必须统一于实践。 这种统一是认识和实践的矛盾在发展中的统一，是具体的、历史的统一。所谓具体的统一，是指主观认识要与一定时间、地点、条件下的客观实践相符合，它是具体的，而不是抽象的；所谓历史的统一，是指主观认识要同特定历史发展阶段的客观实践相符合。由于客观实践是具体的、历史的，所以，主观认识也应是具体的、历史的。客观实践变化了，主观认识也应随之改变。“我们的结论是主观和客观、理论和实践、知和行的具体的历史的统一，反对一切离开具体历史的‘左’的或右的错误思想。” ——《马克思主义基本原理》</p>
-</blockquote>
-<h3 id="12-简述恩格斯的过程论及其意义">12. 简述恩格斯的过程论及其意义。</h3>
-<blockquote>
-<h4 id="基本思想">基本思想</h4>
-<ul>
-<li>客观世界是普遍联系和永恒发展的统一体。</li>
-<li>人的思想是客观事物在头脑中的反映，是不断运动、变化和发展的。</li>
-<li>客观事物和人的思想有其内在必然规律，不受表面上的偶然因素影响。</li>
-<li>在世界的变化发展中，存在着一种不可阻挡的进步趋势。</li>
-</ul>
-<h4 id="理论指导意义">理论指导意义</h4>
-<p>概括: <strong>提倡用历史的、发展的视角看事物。</strong></p>
-<ul>
-<li>强调应认识到事物随着时代和实践的发展而不断变换形态、丰富内涵。</li>
-<li>主张运用历史的、发展的观点来理解和解决各种问题，深入探究事物发展的历史必然性和全貌.</li>
-<li>坚持用变革的发展观指导实践。</li>
-<li>彰显了革命批判精神。</li>
-</ul>
-<h4 id="现实指导意义">现实指导意义</h4>
-<ul>
-<li>提倡以物质为内容，以矛盾为动力，以实践为基础。</li>
-<li>提倡辩证地思考问题，不夸大不缩小，不偏激不教条。</li>
-<li>指导各国发展与实际相结合，按照社会发展规律办事。</li>
-</ul>
-<p>—— 百度百科、快懂百科 改</p>
-</blockquote>
-<h3 id="13-试述马克思主义世界历史观的主要内容及其意义">13. 试述马克思主义世界历史观的主要内容及其意义。</h3>
-<h4 id="形成基础">形成基础</h4>
-<ul>
-<li><strong>世界历史是资本主义大工业发展与世界市场开拓的产物。</strong></li>
-<li>资本主义生产方式突破地域限制，推动商品、资本、劳动力的全球流动，促使人类历史从分散的民族历史走向整体的世界历史。</li>
-</ul>
-<h4 id="本质特征">本质特征</h4>
-<ul>
-<li><strong>核心是普遍交往的形成。</strong></li>
-<li>各民族国家从孤立隔绝状态转变为经济、政治、文化等多领域相互依存的整体，任何国家都无法脱离世界体系独立发展。</li>
-</ul>
-<h4 id="发展动力">发展动力</h4>
-<ul>
-<li><strong>世界发展的根本动力：生产力与生产关系的矛盾运动。</strong></li>
-<li>资本主义将其内在矛盾扩展至全球范围，引发全球性发展矛盾。</li>
-</ul>
-<h4 id="理论意义">理论意义</h4>
-<ul>
-<li>丰富和发展唯物史观，将唯物史观的适用范围从民族国家层面拓展至全球层面。</li>
-<li>为科学认识全球化提供理论框架。</li>
-</ul>
-<h4 id="实践意义">实践意义</h4>
-<ul>
-<li>指导无产阶级革命和社会主义建设，启示社会主义国家坚持对外开放、参与国际交往。</li>
-<li>为应对全球化挑战、构建人类命运共同体提供方法论。</li>
-<li>助力发展中国家把握全球化机遇，规避发展风险。</li>
-</ul>
-<h3 id="14-论述实践与真理的关系">14. 论述实践与真理的关系。</h3>
-<h4 id="实践标准的确定性绝对性">实践标准的确定性（绝对性）</h4>
-<ul>
-<li><strong>实践是检验真理的唯一标准。</strong> 真理的本性是主观和客观的一致、符合，而实践是主观见之于客观的物质活动。</li>
-<li>凡经过实践证明了的一切认识都是客观真理，都具有不可推翻的性质。</li>
-<li>实践能够检验一切认识，即使当前的实践还不能加以判定，最终也会被以后的实践作出裁决。</li>
-</ul>
-<h4 id="实践标准的不确定性">实践标准的不确定性</h4>
-<ul>
-<li>一定历史阶段上具体实践具有局限性，往往不能充分证明或驳倒某一认识的真理性。</li>
-<li>实践检验真理是一个过程，不是一次完成的。</li>
-<li>在发展的实践中不断验证认识的真理性。</li>
-</ul>
-<h3 id="15-论述资本主义经济危机的根源和后果">15. 论述资本主义经济危机的根源和后果。</h3>
-<h4 id="根源">根源</h4>
-<ul>
-<li><strong>资本主义的基本矛盾</strong>
-<ul>
-<li>生产无限扩大的趋势与劳动人民有支付能力的需求相对缩小的矛盾。</li>
-<li>单个企业内部生产的有组织性和整个社会生产的无政府状态之间的矛盾。</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<h4 id="后果">后果</h4>
-<ul>
-<li>经济层面：生产力破坏、市场秩序紊乱
-<blockquote>
-<p>商品积压 → 生产萎缩 → 企业裁员、倒闭 → 失业率飙升 → 贫富差距扩大</p>
-</blockquote>
-</li>
-<li>社会层面：民生水平下降、社会矛盾加剧。</li>
-<li>政治层面：政策调整、国际格局变动、极端思潮抬头。</li>
-<li>长期影响：资本主义生产关系的局部调整（缓解矛盾，无法根除）。</li>
-</ul>
-<p>——豆包 改</p>
-</blockquote>
-<h3 id="16-如何理解经济全球化">16. 如何理解经济全球化？</h3>
-<h4 id="概念-1">概念</h4>
-<ul>
-<li>指在生产不断发展、科技加速进步、社会分工和国际分工不断深化、生产的社会化和国际化程度不断提高的情况下，世界各国、各地区的经济活动越来越超出某一国家和地区的范围而相互联系、相互依存的过程。</li>
-</ul>
-<h4 id="表现">表现</h4>
-<ul>
-<li>生产全球化</li>
-<li>贸易全球化</li>
-<li>金融全球化</li>
-</ul>
-<h4 id="动因">动因</h4>
-<p>本质：<strong>经济全球化是生产力发展和社会化大生产的必然要求。</strong></p>
-<ul>
-<li>科学技术的进步和生产力的发展为经济全球化提供了坚实的物质基础和根本的推动力。</li>
-<li>跨国公司的发展为经济全球化提供了适宜的企业组织形式。</li>
-<li>各国经济体制的变革和国际经济组织的发展是经济全球化的体制与组织保障。</li>
-</ul>
-<h3 id="17-分析哲学的党性问题马克思主义的理论品质">17. 分析哲学的党性问题（马克思主义的理论品质）</h3>
-<ul>
-<li>哲学的党性：<strong>哲学中存在着唯物主义和唯心主义两大根本对立的基本派别</strong>，任何哲学思潮、观点最终都无法超越或调和这两大阵营，这是哲学领域的根本立场问题。</li>
-<li>马克思主义的理论品质：<strong>与时俱进</strong>。</li>
-</ul>
-<blockquote>
-<p>马克思主义的理论品质……指其坚持从实际出发、理论联系实际、实事求是，在实践中检验和发展真理的属性。 ——百度百科</p>
-</blockquote>
+<body class="vscode-body vscode-light">
+  <h1 id="马原主观题">马原主观题</h1>
+  <h2 id="名词解释4题每题4分">名词解释（4题，每题4分）</h2>
+  <h3 id="1-人的认识的非理性因素">1. 人的认识的非理性因素</h3>
+  <ul>
+    <li>主要指认识主体的情感和意志。</li>
+    <li>广义上包括具有不自觉性、非逻辑性的认识形式（如联想、想象、猜测、顿悟、灵感）。</li>
+    <li>对于人的认识能力和认识活动具有激活、驱动作用。</li>
+  </ul>
+  <h3 id="2-主体客体化">2. 主体客体化</h3>
+  <ul>
+    <li>是人通过实践使自己的本质力量作用于客体，使其按照主体的需要发生结构和功能上的变化，形成了世界上本来不存在的对象物。</li>
+    <li>是人的体力和智力的物化体现。</li>
+    <li>是主体的本质力量通过实践活动沉淀、凝聚、物化在客体中。</li>
+  </ul>
+  <h3 id="3-评价价值评价">3. 评价（价值评价）</h3>
+  <ul>
+    <li>是一种关于价值现象的认识活动。</li>
+    <li>是主体对客体价值以及价值大小所作的评判或判断，也称价值判断。</li>
+    <li>具有主观性。</li>
+    <li><strong>正确评价</strong> 是正确反应价值关系的评价。</li>
+  </ul>
+  <h3 id="4-社会意识形式">4. 社会意识形式</h3>
+  <ul>
+    <li>是高层次的社会意识。</li>
+    <li>是自觉的、系统的、相对稳定的社会意识（包括政治法律思想、道德、艺术、宗教、哲学、科学）。</li>
+    <li>以理性认识为主。</li>
+    <li>以社会心理为基础，对社会心理起指导和影响作用。</li>
+  </ul>
+  <h3 id="5-社会革命">5. 社会革命</h3>
+  <ul>
+    <li>是社会基本矛盾所引起的广泛而深刻的社会变革的统称。</li>
+    <li>既包括推翻旧制度旧社会、建立新制度新社会的 <strong>革命（狭义的社会革命）</strong>，也包括不变更根本制度，但对体制机制进行深刻改造并对社会进步影响深远的 <strong>改革</strong>。</li>
+    <li><strong>革命（狭义的社会革命）</strong> 是阶级斗争的最高形式，实质是革命阶级推翻反动阶级的统治，用新的社会制度代替旧的社会制度。</li>
+    <li>在社会形态更替和一定社会自身发展中有巨大的历史进步作用。</li>
+  </ul>
+  <h3 id="6-两个王国">6. 两个王国</h3>
+  <blockquote>
+    <ul>
+      <li><strong>必然王国</strong> 指人类在社会生活中受盲目的、异己的自然规律和社会规律支配的状态。</li>
+      <li><strong>自由王国</strong> 指人类在认识客观规律的基础上，能够自觉运用规律来改造世界和支配自身社会关系的状态。</li>
+    </ul>
+    <p>——DeepSeek</p>
+  </blockquote>
+  <h3 id="7-物质动因">7. 物质动因</h3>
+  <blockquote>
+    <p>指推动人类社会发展、历史事件发生以及主体行为选择的客观物质性因素。 ——豆包</p>
+  </blockquote>
+  <br>
+  <h2 id="简答2题共12分论述2题共20分材料分析1题22分">简答（2题，共12分）、论述（2题，共20分）、材料分析（1题，22分）</h2>
+  <h3 id="8-辩证的否定观的基本内容是什么">8. 辩证的否定观的基本内容是什么？</h3>
+  <ul>
+    <li>否定是事物的自我否定、自我发展，是事物内部矛盾运动的结果。</li>
+    <li>否定是事物发展的环节，是旧事物向新事物的转变，是从旧质到新质的飞跃。</li>
+    <li>否定是新旧事物联系的环节，新事物孕育产生于旧事物，新旧事物是通过否定环节联系起来的。</li>
+    <li>辩证否定的实质是“扬弃”，即新事物对旧事物既批判又继承，既克服其消极因素又保留其积极因素。</li>
+  </ul>
+  <h3 id="9-简述唯心史观的主要缺陷">9. 简述唯心史观的主要缺陷。</h3>
+  <ul>
+    <li>没有进一步考究思想动机背后的物质动因和经济根源。</li>
+    <li>忽视人民群众创造历史的决定作用。</li>
+  </ul>
+  <h3 id="10-简述认识与实践的关系">10. 简述认识与实践的关系。</h3>
+  <ul>
+    <li>实践决定认识。</li>
+    <li>认识指导实践。</li>
+  </ul>
+  <blockquote>
+    <p>实践的观点是辩证唯物论的认识论之第一和基本的观点。 ——《毛泽东选集》</p>
+  </blockquote>
+  <h3 id="11-如何理解实践和认识是具体的历史的统一">11. 如何理解实践和认识是具体的、历史的统一？</h3>
+  <h4 id="推导">推导</h4>
+  <ul>
+    <li>主观必须统一于客观，认识必须统一于实践。</li>
+    <li>客观实践是具体的、历史的 ⇒ 主观认识是具体的、历史的。</li>
+  </ul>
+  <h4 id="概念">概念</h4>
+  <ul>
+    <li>具体的统一：主观认识要与一定时间、地点、条件下的客观实践相符合。</li>
+    <li>历史的统一：主观认识要同特定历史发展阶段的客观实践相符合。</li>
+  </ul>
+  <blockquote>
+    <p>在实践和认识的辨证运动中，主管必须统一于客观，认识必须统一于实践。
+      这种统一是认识和实践的矛盾在发展中的统一，是具体的、历史的统一。所谓具体的统一，是指主观认识要与一定时间、地点、条件下的客观实践相符合，它是具体的，而不是抽象的；所谓历史的统一，是指主观认识要同特定历史发展阶段的客观实践相符合。由于客观实践是具体的、历史的，所以，主观认识也应是具体的、历史的。客观实践变化了，主观认识也应随之改变。“我们的结论是主观和客观、理论和实践、知和行的具体的历史的统一，反对一切离开具体历史的‘左’的或右的错误思想。”
+      ——《马克思主义基本原理》</p>
+  </blockquote>
+  <h3 id="12-简述恩格斯的过程论及其意义">12. 简述恩格斯的过程论及其意义。</h3>
+  <blockquote>
+    <h4 id="基本思想">基本思想</h4>
+    <ul>
+      <li>客观世界是普遍联系和永恒发展的统一体。</li>
+      <li>人的思想是客观事物在头脑中的反映，是不断运动、变化和发展的。</li>
+      <li>客观事物和人的思想有其内在必然规律，不受表面上的偶然因素影响。</li>
+      <li>在世界的变化发展中，存在着一种不可阻挡的进步趋势。</li>
+    </ul>
+    <h4 id="理论指导意义">理论指导意义</h4>
+    <p>概括: <strong>提倡用历史的、发展的视角看事物。</strong></p>
+    <ul>
+      <li>强调应认识到事物随着时代和实践的发展而不断变换形态、丰富内涵。</li>
+      <li>主张运用历史的、发展的观点来理解和解决各种问题，深入探究事物发展的历史必然性和全貌.</li>
+      <li>坚持用变革的发展观指导实践。</li>
+      <li>彰显了革命批判精神。</li>
+    </ul>
+    <h4 id="现实指导意义">现实指导意义</h4>
+    <ul>
+      <li>提倡以物质为内容，以矛盾为动力，以实践为基础。</li>
+      <li>提倡辩证地思考问题，不夸大不缩小，不偏激不教条。</li>
+      <li>指导各国发展与实际相结合，按照社会发展规律办事。</li>
+    </ul>
+    <p>—— 百度百科、快懂百科 改</p>
+  </blockquote>
+  <h3 id="13-试述马克思主义世界历史观的主要内容及其意义">13. 试述马克思主义世界历史观的主要内容及其意义。</h3>
+  <h4 id="形成基础">形成基础</h4>
+  <ul>
+    <li><strong>世界历史是资本主义大工业发展与世界市场开拓的产物。</strong></li>
+    <li>资本主义生产方式突破地域限制，推动商品、资本、劳动力的全球流动，促使人类历史从分散的民族历史走向整体的世界历史。</li>
+  </ul>
+  <h4 id="本质特征">本质特征</h4>
+  <ul>
+    <li><strong>核心是普遍交往的形成。</strong></li>
+    <li>各民族国家从孤立隔绝状态转变为经济、政治、文化等多领域相互依存的整体，任何国家都无法脱离世界体系独立发展。</li>
+  </ul>
+  <h4 id="发展动力">发展动力</h4>
+  <ul>
+    <li><strong>世界发展的根本动力：生产力与生产关系的矛盾运动。</strong></li>
+    <li>资本主义将其内在矛盾扩展至全球范围，引发全球性发展矛盾。</li>
+  </ul>
+  <h4 id="理论意义">理论意义</h4>
+  <ul>
+    <li>丰富和发展唯物史观，将唯物史观的适用范围从民族国家层面拓展至全球层面。</li>
+    <li>为科学认识全球化提供理论框架。</li>
+  </ul>
+  <h4 id="实践意义">实践意义</h4>
+  <ul>
+    <li>指导无产阶级革命和社会主义建设，启示社会主义国家坚持对外开放、参与国际交往。</li>
+    <li>为应对全球化挑战、构建人类命运共同体提供方法论。</li>
+    <li>助力发展中国家把握全球化机遇，规避发展风险。</li>
+  </ul>
+  <h3 id="14-论述实践与真理的关系">14. 论述实践与真理的关系。</h3>
+  <h4 id="实践标准的确定性绝对性">实践标准的确定性（绝对性）</h4>
+  <ul>
+    <li><strong>实践是检验真理的唯一标准。</strong> 真理的本性是主观和客观的一致、符合，而实践是主观见之于客观的物质活动。</li>
+    <li>凡经过实践证明了的一切认识都是客观真理，都具有不可推翻的性质。</li>
+    <li>实践能够检验一切认识，即使当前的实践还不能加以判定，最终也会被以后的实践作出裁决。</li>
+  </ul>
+  <h4 id="实践标准的不确定性">实践标准的不确定性</h4>
+  <ul>
+    <li>一定历史阶段上具体实践具有局限性，往往不能充分证明或驳倒某一认识的真理性。</li>
+    <li>实践检验真理是一个过程，不是一次完成的。</li>
+    <li>在发展的实践中不断验证认识的真理性。</li>
+  </ul>
+  <h3 id="15-论述资本主义经济危机的根源和后果">15. 论述资本主义经济危机的根源和后果。</h3>
+  <h4 id="根源">根源</h4>
+  <ul>
+    <li><strong>资本主义的基本矛盾</strong>
+      <ul>
+        <li>生产无限扩大的趋势与劳动人民有支付能力的需求相对缩小的矛盾。</li>
+        <li>单个企业内部生产的有组织性和整个社会生产的无政府状态之间的矛盾。</li>
+      </ul>
+    </li>
+  </ul>
+  <blockquote>
+    <h4 id="后果">后果</h4>
+    <ul>
+      <li>经济层面：生产力破坏、市场秩序紊乱
+        <blockquote>
+          <p>商品积压 → 生产萎缩 → 企业裁员、倒闭 → 失业率飙升 → 贫富差距扩大</p>
+        </blockquote>
+      </li>
+      <li>社会层面：民生水平下降、社会矛盾加剧。</li>
+      <li>政治层面：政策调整、国际格局变动、极端思潮抬头。</li>
+      <li>长期影响：资本主义生产关系的局部调整（缓解矛盾，无法根除）。</li>
+    </ul>
+    <p>——豆包 改</p>
+  </blockquote>
+  <h3 id="16-如何理解经济全球化">16. 如何理解经济全球化？</h3>
+  <h4 id="概念-1">概念</h4>
+  <ul>
+    <li>指在生产不断发展、科技加速进步、社会分工和国际分工不断深化、生产的社会化和国际化程度不断提高的情况下，世界各国、各地区的经济活动越来越超出某一国家和地区的范围而相互联系、相互依存的过程。</li>
+  </ul>
+  <h4 id="表现">表现</h4>
+  <ul>
+    <li>生产全球化</li>
+    <li>贸易全球化</li>
+    <li>金融全球化</li>
+  </ul>
+  <h4 id="动因">动因</h4>
+  <p>本质：<strong>经济全球化是生产力发展和社会化大生产的必然要求。</strong></p>
+  <ul>
+    <li>科学技术的进步和生产力的发展为经济全球化提供了坚实的物质基础和根本的推动力。</li>
+    <li>跨国公司的发展为经济全球化提供了适宜的企业组织形式。</li>
+    <li>各国经济体制的变革和国际经济组织的发展是经济全球化的体制与组织保障。</li>
+  </ul>
+  <h3 id="17-分析哲学的党性问题马克思主义的理论品质">17. 分析哲学的党性问题（马克思主义的理论品质）</h3>
+  <ul>
+    <li>哲学的党性：<strong>哲学中存在着唯物主义和唯心主义两大根本对立的基本派别</strong>，任何哲学思潮、观点最终都无法超越或调和这两大阵营，这是哲学领域的根本立场问题。</li>
+    <li>马克思主义的理论品质：<strong>与时俱进</strong>。</li>
+  </ul>
+  <blockquote>
+    <p>马克思主义的理论品质……指其坚持从实际出发、理论联系实际、实事求是，在实践中检验和发展真理的属性。 ——百度百科</p>
+  </blockquote>
 
-            
-            
-        </body>
-        </html>
+
+
+</body>
+
+</html>
